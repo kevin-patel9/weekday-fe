@@ -88,6 +88,7 @@ const JobCard = ({ job }) => {
                 </Box>
                 </CardContent>
             </Box>
+            {/* Modal */}
             <Modal open={open} onClose={handleClose}>
                 <Box
                 sx={{

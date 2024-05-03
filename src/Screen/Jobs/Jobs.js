@@ -21,11 +21,8 @@ const JobCard = ({ job }) => {
 
     return (
         <>
-            <Box boxShadow={4} borderRadius={6} height={530} position="relative" overflow={"hidden"}>
+            <Box boxShadow={4} borderRadius={6} height={520} overflow={"hidden"}>
                 <CardContent>
-                <Typography variant="div" color="text.secondary">
-                    6 days ago
-                </Typography>
                 <Box
                     sx={{ textTransform: "capitalize", margin: "10px 0", gap: 1.4, alignItems: "center" }}
                     display="flex"

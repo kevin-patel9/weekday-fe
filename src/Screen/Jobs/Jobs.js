@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
+import { CardMedia } from "@mui/material";
 
 const JobCard = ({ job }) => {
     const [open, setOpen] = useState(false);
@@ -18,28 +19,37 @@ const JobCard = ({ job }) => {
 
     return (
         <>
-            <Box boxShadow={4} borderRadius={6} height={490} position="relative">
+            <Box boxShadow={4} borderRadius={6} height={520} position="relative">
                 <CardContent>
                 <Typography variant="div" color="text.secondary">
                     6 days ago
                 </Typography>
                 <Box
-                    sx={{ textTransform: "capitalize", margin: "10px 0" }}
-                    display="grid"
+                    sx={{ textTransform: "capitalize", margin: "10px 0", gap: 1.4, alignItems: "center" }}
+                    display="flex"
                 >
-                    <Typography component="div">{job.jobRole}</Typography>
-                    <Typography variant="body2" color="text.secondary">
-                    {job.location}
-                    </Typography>
+                    <CardMedia
+                        component="img"
+                        sx={{ width: 49, height: 49 }}
+                        image={job.logoUrl}
+                        alt="Company Logo"
+                    />
+                    <Box>
+                        <Typography component="div">{job.companyName}</Typography>
+                        <Typography component="body2" color="text.secondary">{job.jobRole}</Typography>
+                        <Typography variant="body2" color="text.secondary">
+                            {job.location}
+                        </Typography>
+                    </Box>
                 </Box>
                 {job.minJdSalary ? (
                     <Typography marginBottom={2} variant="body2" color="text.secondary">
-                    Estimated Salary: {job.salaryCurrencyCode} {job.minJdSalary} -{" "}
-                    {job.maxJdSalary}
+                    Estimated Salary: {job.salaryCurrencyCode} {job.minJdSalary}k -{" "}
+                    {job.maxJdSalary}k LPA
                     </Typography>
                 ) : (
                     <Typography marginBottom={2} variant="body2" color="text.secondary">
-                    Estimated Salary: {job.salaryCurrencyCode} {job.maxJdSalary}
+                    Estimated Salary: {job.salaryCurrencyCode} {job.maxJdSalary}k LPA
                     </Typography>
                 )}
                 <Typography variant="body2" component="div">
@@ -53,16 +63,17 @@ const JobCard = ({ job }) => {
                 </Typography>
                 <Box
                     sx={{
-                    position: "absolute",
-                    background: "white",
-                    width: 320,
-                    opacity: 0.9,
-                    textAlign: "center",
+                        position: "absolute",
+                        background: "white",
+                        width: 320,
+                        opacity: 0.94,
+                        textAlign: "center",
+                        padding: "8px 0"
                     }}
                     position="absolute"
-                    bottom={120}
+                    bottom={110}
                 >
-                    <Button onClick={handleOpen}>View Job</Button>
+                    <Button sx={{ fontWeight: "600" }} onClick={handleOpen}>View Job</Button>
                 </Box>
                 <Typography
                     position="absolute"

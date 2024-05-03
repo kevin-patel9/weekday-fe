@@ -1,4 +1,4 @@
-import { Grid, Box } from "@mui/material";
+import { Grid, Box, TextField } from "@mui/material";
 import JobCard from "./Screen/Jobs/Jobs";
 import { useEffect, useState } from "react";
 import { allJobApi } from "./Api/JobApi";
@@ -8,6 +8,7 @@ import { experienceOptions, roleOptions, salaryOptions, workOptions } from "./co
 const App = () => {
   const [jobListings, setJobListings] = useState([]);
 
+  // fetch job data
   useEffect(() => {
     const getJobList = async () => {
       const response = await allJobApi();
@@ -22,6 +23,7 @@ const App = () => {
   const [selectedExperience, setSelectedExperience] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState([]);
   const [selectedSalary, setSelectedSalary] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   // store selected filtered option accordingly
   const handleRoleChange = (selected) => {
@@ -53,11 +55,19 @@ const App = () => {
         return true;
       });
     }
-  
+
     const filteredJobs = filterJob();
-    setFilteredJobs(filteredJobs);
-  }, [selectedSalary, selectedExperience, selectedRoles, selectedLocation]);
-  
+      setFilteredJobs(filteredJobs);
+    }, [selectedSalary, selectedExperience, selectedRoles, selectedLocation]);
+    
+    useEffect(() => {
+      function searchFilter () {
+        return jobListings.filter(item =>
+          item.companyName.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+      }
+      setFilteredJobs(searchFilter());
+    },[searchQuery]);
 
   return (
     <Box margin={14} marginTop={4}>
@@ -85,6 +95,13 @@ const App = () => {
           onChange={handleSalaryChange}
           options={salaryOptions}
           isMulti
+        />
+        <TextField
+          placeholder="Search Company"
+          variant="outlined"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          sx={{ marginBottom: 2, "& .MuiOutlinedInput-root": { height: 38 } }}
         />
       </Grid>
       {/* All Cards List*/}

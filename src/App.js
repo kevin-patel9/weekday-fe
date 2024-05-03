@@ -1,4 +1,4 @@
-import { Grid, Box, TextField } from "@mui/material";
+import { Grid, Box, TextField, Typography } from "@mui/material";
 import JobCard from "./Screen/Jobs/Jobs";
 import { useEffect, useState } from "react";
 import { allJobApi } from "./Api/JobApi";
@@ -7,15 +7,31 @@ import { experienceOptions, roleOptions, salaryOptions, workOptions } from "./co
 
 const App = () => {
   const [jobListings, setJobListings] = useState([]);
+  const [jobLimit, setJobLimit] = useState(10);
 
   // fetch job data
   useEffect(() => {
     const getJobList = async () => {
-      const response = await allJobApi();
+      const response = await allJobApi(jobLimit);
       setJobListings(response?.jdList);
       setFilteredJobs(response?.jdList);
     };
     getJobList();
+  }, [jobLimit]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+
+      if (scrollTop + clientHeight >= scrollHeight) {
+        setJobLimit(prev => prev + 10);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   const [filteredJobs, setFilteredJobs] = useState([]);
@@ -70,7 +86,7 @@ const App = () => {
     },[searchQuery]);
 
   return (
-    <Box margin={14} marginTop={4}>
+    <Box margin={8} marginTop={4}>
       <Grid container gap={1.4} marginBottom={2}>
         <Select
           placeholder="Roles"
@@ -111,7 +127,15 @@ const App = () => {
             <JobCard job={job} />
           </Grid>
         ))}
+
       </Grid>
+        {filteredJobs.length === 0 && 
+          <Typography 
+            sx={{ textAlign: "center", marginTop: 20 }} 
+            variant="h4">
+              No Search Found
+          </Typography>
+        }
     </Box>
   );
 };

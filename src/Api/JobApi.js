@@ -1,9 +1,9 @@
-export const allJobApi = async () => {
+export const allJobApi = async (jobLimit) => {
     try {
         const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
         const body = JSON.stringify({
-            limit: 10,
+            limit: jobLimit,
             offset: 0,
         });
 

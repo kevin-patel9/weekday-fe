@@ -5,6 +5,8 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import { CardMedia } from "@mui/material";
+import ElectricBoltIcon from '@mui/icons-material/ElectricBolt';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
 const JobCard = ({ job }) => {
     const [open, setOpen] = useState(false);
@@ -19,7 +21,7 @@ const JobCard = ({ job }) => {
 
     return (
         <>
-            <Box boxShadow={4} borderRadius={6} height={520} position="relative">
+            <Box boxShadow={4} borderRadius={6} height={530} position="relative" overflow={"hidden"}>
                 <CardContent>
                 <Typography variant="div" color="text.secondary">
                     6 days ago
@@ -43,13 +45,28 @@ const JobCard = ({ job }) => {
                     </Box>
                 </Box>
                 {job.minJdSalary ? (
-                    <Typography marginBottom={2} variant="body2" color="text.secondary">
-                    Estimated Salary: {job.salaryCurrencyCode} {job.minJdSalary}k -{" "}
-                    {job.maxJdSalary}k LPA
+                    <Typography 
+                        marginBottom={2} 
+                        display={"flex"} 
+                        gap={1} 
+                        alignItems={"center"} 
+                        variant="body2" 
+                        color="text.secondary"
+                    >
+                        Estimated Salary: {job.salaryCurrencyCode} {job.minJdSalary}k -{" "}
+                    {job.maxJdSalary}k LPA <CheckBoxIcon sx={{ color: "#16C60C" }} />
                     </Typography>
                 ) : (
-                    <Typography marginBottom={2} variant="body2" color="text.secondary">
-                    Estimated Salary: {job.salaryCurrencyCode} {job.maxJdSalary}k LPA
+                    <Typography 
+                        marginBottom={2} 
+                        display={"flex"} 
+                        gap={1} 
+                        alignItems={"center"} 
+                        variant="body2" 
+                        color="text.secondary"
+                    >
+                        Estimated Salary: {job.salaryCurrencyCode} {job.maxJdSalary}k LPA{" "}
+                        <CheckBoxIcon sx={{ color: "green" }} />
                     </Typography>
                 )}
                 <Typography variant="body2" component="div">
@@ -63,37 +80,32 @@ const JobCard = ({ job }) => {
                 </Typography>
                 <Box
                     sx={{
-                        position: "absolute",
                         background: "white",
-                        width: 320,
-                        opacity: 0.94,
                         textAlign: "center",
-                        padding: "8px 0"
                     }}
-                    position="absolute"
-                    bottom={110}
                 >
                     <Button sx={{ fontWeight: "600" }} onClick={handleOpen}>View Job</Button>
                 </Box>
                 <Typography
-                    position="absolute"
-                    bottom={69}
                     variant="body2"
                     component="div"
+                    sx={{ margin: "14px 0" }}
                 >
                     <Typography variant="subtitle2" color="text.secondary">
-                    Minimum Experience
+                        Minimum Experience
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                     {job.minExp} years
                     </Typography>
                 </Typography>
-                <Box position="absolute" bottom={0} paddingBottom={2} width={320}>
+                
+                <Box bottom={0} paddingBottom={2}>
                     <Button
-                    fullWidth
-                    sx={{ background: "#55efc4", color: "black", fontWeight: "600" }}
-                    variant="outlined"
+                        fullWidth
+                        sx={{ background: "#55efc4", color: "black", fontWeight: "600" }}
+                        variant="outlined"
                     >
+                    <ElectricBoltIcon sx={{ color: "yellow" }} />
                     Easy Apply
                     </Button>
                 </Box>

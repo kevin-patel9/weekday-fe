@@ -125,9 +125,6 @@ const JobCard = ({ job }) => {
                     p: 4,
                 }}
                 >
-                    <Typography variant="div" color="text.secondary">
-                        6 days ago
-                    </Typography>
                     <Box
                         sx={{ textTransform: "capitalize", margin: "10px 0" }}
                         display="grid"

@@ -83,20 +83,22 @@ const JobCard = ({ job }) => {
                 >
                     <Button sx={{ fontWeight: "600" }} onClick={handleOpen}>View Job</Button>
                 </Box>
-                <Typography
-                    variant="body2"
-                    component="div"
-                    sx={{ margin: "14px 0" }}
-                >
-                    <Typography variant="subtitle2" color="text.secondary">
-                        Minimum Experience
+                {job.minExp &&
+                    <Typography
+                        variant="body2"
+                        component="div"
+                        sx={{ margin: "14px 0" }}
+                    >
+                        <Typography variant="subtitle2" color="text.secondary">
+                            Minimum Experience
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                        {job.minExp} years
+                        </Typography>
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                    {job.minExp} years
-                    </Typography>
-                </Typography>
+                }
                 
-                <Box bottom={0} paddingBottom={2}>
+                <Box sx={{ paddingBottom: 2, marginTop: !job.minExp && 9 }}>
                     <Button
                         fullWidth
                         sx={{ background: "#55efc4", color: "black", fontWeight: "600" }}

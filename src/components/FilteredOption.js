@@ -7,6 +7,7 @@ export const roleOptions = [
     { value: "flutter", label: "Flutter" },
     { value: "react-native", label: "React Native" },
     { value: "android", label: "Android" },
+    { value: "tech", label: "Tech Lead" },
 ];
 
 // Experience
